@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="bottomPlayButton" destination="43V-Wt-hhH" id="3N4-xf-gDS"/>
                 <outlet property="bottomPlayContainer" destination="sw2-lS-gWC" id="hda-It-H1n"/>
+                <outlet property="musicTimeSlider" destination="08c-8F-bBg" id="YyL-VH-STt"/>
                 <outlet property="searchField" destination="HFf-bc-7qb" id="oLU-Co-b6z"/>
                 <outlet property="tableView" destination="8KD-7I-h2E" id="GuX-lD-8e7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -50,7 +51,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43V-Wt-hhH">
                                             <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="34.333333333333336"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="stop.fill" catalog="system" title=" "/>
+                                            <buttonConfiguration key="configuration" style="plain" image="pause.fill" catalog="system" title=" "/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8P-w5-xmG">
                                             <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="34.333333333333336"/>
@@ -59,7 +60,7 @@
                                         </button>
                                     </subviews>
                                 </stackView>
-                                <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="08c-8F-bBg">
+                                <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="08c-8F-bBg">
                                     <rect key="frame" x="14" y="34.333333333333371" width="365" height="41.666666666666657"/>
                                 </slider>
                             </subviews>
@@ -96,7 +97,7 @@
     <resources>
         <image name="backward.fill" catalog="system" width="128" height="77"/>
         <image name="forward.fill" catalog="system" width="128" height="77"/>
-        <image name="stop.fill" catalog="system" width="128" height="113"/>
+        <image name="pause.fill" catalog="system" width="117" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

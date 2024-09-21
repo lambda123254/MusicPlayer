@@ -8,6 +8,7 @@
 import Foundation
 
 public struct SongModel: Codable {
+    public let wrapperType: String?
     public let trackName: String?
     public let artistName: String?
     public let collectionName: String?

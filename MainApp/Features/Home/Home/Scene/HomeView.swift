@@ -9,25 +9,17 @@ import UIKit
 import Combine
 import AVFoundation
 
-enum HomeViewState {
-    case musicPlaying
-    case musicStop
-    case noMusic
-}
-
 class HomeView: UIViewController {
     
     var viewModel: HomeViewModel?
     
     private var cancellables = Set<AnyCancellable>()
-    private var state: HomeViewState = .noMusic
-    private var audioPlayer: AVPlayer?
     
     @IBOutlet weak var searchField: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomPlayContainer: UIView!
     @IBOutlet weak var bottomPlayButton: UIButton!
-    
+    @IBOutlet weak var musicTimeSlider: UISlider!
     
     init() {
         super.init(nibName: String(describing: HomeView.self), bundle: Bundle(for: HomeView.self))
@@ -42,6 +34,7 @@ class HomeView: UIViewController {
         setupTableView()
         setupSearchField()
         setupBottomPlayButton()
+        setupBottomMusicPlayer()
         bindViewModel()
     }
     
@@ -59,6 +52,11 @@ class HomeView: UIViewController {
         bottomPlayButton.addTarget(self, action: #selector(bottomPlayButtonTapped), for: .touchUpInside)
     }
     
+    func setupBottomMusicPlayer() {
+        musicTimeSlider.value = 0
+        musicTimeSlider.minimumValue = 0
+    }
+    
     private func bindViewModel() {
         viewModel?.$songListData
             .receive(on: RunLoop.main)
@@ -68,26 +66,13 @@ class HomeView: UIViewController {
     }
     
     @objc func bottomPlayButtonTapped() {
-        switch state {
-        case .musicPlaying:
-            bottomPlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            state = .musicStop
-            audioPlayer?.pause()
-        case .musicStop:
-            bottomPlayButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-            state = .musicPlaying
-            audioPlayer?.play()
-        case .noMusic:
-            break
-        }
+        viewModel?.bottomPlayButtonTapped()
     }
     
 }
 
 extension HomeView: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchField.showsCancelButton = true
     }
@@ -127,10 +112,6 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         bottomPlayContainer.isHidden = false
-        state = .musicPlaying
-        if let data = viewModel?.songListData[indexPath.row].previewUrl, let url = URL(string: data) {
-            audioPlayer = AVPlayer(url: url)
-            audioPlayer?.play()
-        }
+        viewModel?.playSong(index: indexPath.row)
     }
 }

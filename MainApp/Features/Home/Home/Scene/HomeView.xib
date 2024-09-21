@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeView" customModule="Home" customModuleProvider="target">
             <connections>
+                <outlet property="bottomPlayButton" destination="43V-Wt-hhH" id="3N4-xf-gDS"/>
+                <outlet property="bottomPlayContainer" destination="sw2-lS-gWC" id="hda-It-H1n"/>
                 <outlet property="searchField" destination="HFf-bc-7qb" id="oLU-Co-b6z"/>
                 <outlet property="tableView" destination="8KD-7I-h2E" id="GuX-lD-8e7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -31,14 +33,14 @@
                     <rect key="frame" x="16" y="131" width="361" height="671"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sw2-lS-gWC">
-                    <rect key="frame" x="16" y="743" width="361" height="75"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sw2-lS-gWC">
+                    <rect key="frame" x="0.0" y="743" width="393" height="75"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7oY-Fo-iRd">
-                            <rect key="frame" x="0.0" y="0.0" width="361" height="75"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="75"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaH-qL-Nbn">
-                                    <rect key="frame" x="0.0" y="0.0" width="361" height="34.333333333333336"/>
+                                    <rect key="frame" x="16" y="0.0" width="361" height="34.333333333333336"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgX-ri-0pL">
                                             <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="34.333333333333336"/>
@@ -48,7 +50,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43V-Wt-hhH">
                                             <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="34.333333333333336"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system" title=" "/>
+                                            <buttonConfiguration key="configuration" style="plain" image="stop.fill" catalog="system" title=" "/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8P-w5-xmG">
                                             <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="34.333333333333336"/>
@@ -58,12 +60,13 @@
                                     </subviews>
                                 </stackView>
                                 <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="08c-8F-bBg">
-                                    <rect key="frame" x="-2" y="34.333333333333371" width="365" height="41.666666666666657"/>
+                                    <rect key="frame" x="14" y="34.333333333333371" width="365" height="41.666666666666657"/>
                                 </slider>
                             </subviews>
+                            <edgeInsets key="layoutMargins" top="0.0" left="16" bottom="0.0" right="16"/>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="7oY-Fo-iRd" secondAttribute="trailing" id="56H-xC-KkP"/>
                         <constraint firstAttribute="bottom" secondItem="7oY-Fo-iRd" secondAttribute="bottom" id="CiV-yR-qyh"/>
@@ -84,8 +87,8 @@
                 <constraint firstItem="HFf-bc-7qb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="WbW-Wa-Vhp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8KD-7I-h2E" secondAttribute="trailing" constant="16" id="tWG-Zj-ujB"/>
                 <constraint firstItem="HFf-bc-7qb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="wMt-T6-Y6W"/>
-                <constraint firstItem="sw2-lS-gWC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="xUP-Jr-XdD"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sw2-lS-gWC" secondAttribute="trailing" constant="16" id="zZL-IW-sQW"/>
+                <constraint firstItem="sw2-lS-gWC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xUP-Jr-XdD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sw2-lS-gWC" secondAttribute="trailing" id="zZL-IW-sQW"/>
             </constraints>
             <point key="canvasLocation" x="123" y="20"/>
         </view>
@@ -93,9 +96,12 @@
     <resources>
         <image name="backward.fill" catalog="system" width="128" height="77"/>
         <image name="forward.fill" catalog="system" width="128" height="77"/>
-        <image name="play.fill" catalog="system" width="117" height="128"/>
+        <image name="stop.fill" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

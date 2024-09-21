@@ -8,7 +8,7 @@
 import Services
 import Common
 
-class HomeViewModel: ObservableObject {
+class HomeViewModel {
     weak var view: HomeView?
     
     private var networkService: NetworkService = NetworkService()

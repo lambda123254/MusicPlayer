@@ -7,15 +7,27 @@
 
 import UIKit
 import Combine
+import AVFoundation
+
+enum HomeViewState {
+    case musicPlaying
+    case musicStop
+    case noMusic
+}
 
 class HomeView: UIViewController {
     
     var viewModel: HomeViewModel?
     
     private var cancellables = Set<AnyCancellable>()
+    private var state: HomeViewState = .noMusic
+    private var audioPlayer: AVPlayer?
     
     @IBOutlet weak var searchField: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bottomPlayContainer: UIView!
+    @IBOutlet weak var bottomPlayButton: UIButton!
+    
     
     init() {
         super.init(nibName: String(describing: HomeView.self), bundle: Bundle(for: HomeView.self))
@@ -29,6 +41,7 @@ class HomeView: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupSearchField()
+        setupBottomPlayButton()
         bindViewModel()
     }
     
@@ -42,12 +55,31 @@ class HomeView: UIViewController {
         searchField.delegate = self
     }
     
+    func setupBottomPlayButton() {
+        bottomPlayButton.addTarget(self, action: #selector(bottomPlayButtonTapped), for: .touchUpInside)
+    }
+    
     private func bindViewModel() {
         viewModel?.$songListData
             .receive(on: RunLoop.main)
             .sink { [weak self] data in
                 self?.tableView.reloadData()
             }.store(in: &cancellables)
+    }
+    
+    @objc func bottomPlayButtonTapped() {
+        switch state {
+        case .musicPlaying:
+            bottomPlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            state = .musicStop
+            audioPlayer?.pause()
+        case .musicStop:
+            bottomPlayButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            state = .musicPlaying
+            audioPlayer?.play()
+        case .noMusic:
+            break
+        }
     }
     
 }
@@ -88,7 +120,17 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        bottomPlayContainer.isHidden = false
+        state = .musicPlaying
+        if let data = viewModel?.songListData[indexPath.row].previewUrl, let url = URL(string: data) {
+            audioPlayer = AVPlayer(url: url)
+            audioPlayer?.play()
+        }
     }
 }

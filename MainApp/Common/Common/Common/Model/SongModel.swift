@@ -11,4 +11,5 @@ public struct SongModel: Codable {
     public let trackName: String?
     public let artistName: String?
     public let collectionName: String?
+    public let previewUrl: String?
 }

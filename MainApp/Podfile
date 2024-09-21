@@ -1,0 +1,39 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+workspace 'main-app-mp'
+
+target 'MusicPlayer' do
+  project 'Essentials/MusicPlayer.project'
+  use_frameworks!
+  pod 'Alamofire'
+
+
+end
+
+target 'Services' do
+  project 'Services/Services/Services.project'
+  use_frameworks!
+
+  pod 'Alamofire'
+
+end
+
+target 'AppNavigation' do
+  project 'AppNavigation/AppNavigation/AppNavigation.project'
+  use_frameworks!
+end
+
+target 'Home' do
+  project 'Features/Home/Home.project'
+  use_frameworks!
+end
+
+target 'LaunchScreen' do
+  project 'Features/LaunchScreen/LaunchScreen.project'
+  use_frameworks!
+end
+
+target 'Common' do
+  project 'Common/Common/Common.project'
+  use_frameworks!
+end

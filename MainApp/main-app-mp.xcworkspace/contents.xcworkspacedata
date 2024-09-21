@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Services/Services/Services.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "Features">
+      <FileRef
+         location = "group:Features/LaunchScreen/LaunchScreen.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Features/Home/Home.xcodeproj">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Essentials/MusicPlayer.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:AppNavigation/AppNavigation/AppNavigation.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Common/Common/Common.xcodeproj">
+   </FileRef>
+</Workspace>

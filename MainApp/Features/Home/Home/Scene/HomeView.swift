@@ -29,7 +29,6 @@ class HomeView: UIViewController {
         super.viewDidLoad()
         setupTableView()
         bindViewModel()
-        viewModel?.fetchSongData()
     }
     
     func setupTableView() {
@@ -56,7 +55,7 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.string, for: indexPath) as? HomeTableViewCell, let data = viewModel?.songListData {
             cell.songLabel.text = data[indexPath.row].trackName
             cell.artistLabel.text = data[indexPath.row].artistName
-            cell.songLabel.text = data[indexPath.row].collectionName
+            cell.albumLabel.text = data[indexPath.row].collectionName
             return cell
         }
         return UITableViewCell()

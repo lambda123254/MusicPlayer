@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,10 +20,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="468" height="156"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hD4-e1-2hT">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="156"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="156"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="57U-HZ-nIy">
-                                        <rect key="frame" x="39" y="42" width="72" height="72"/>
+                                        <rect key="frame" x="14" y="42" width="72" height="72"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="72" id="GHX-nO-J8M"/>
@@ -32,30 +31,29 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="0x6-E2-5Xf"/>
+                                    <constraint firstAttribute="width" constant="100" id="0x6-E2-5Xf"/>
                                     <constraint firstItem="57U-HZ-nIy" firstAttribute="centerY" secondItem="hD4-e1-2hT" secondAttribute="centerY" id="2ua-IN-AeR"/>
                                     <constraint firstItem="57U-HZ-nIy" firstAttribute="centerX" secondItem="hD4-e1-2hT" secondAttribute="centerX" id="DZG-FS-NA5"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0SI-TB-7B7">
-                                <rect key="frame" x="150" y="0.0" width="318" height="156"/>
+                                <rect key="frame" x="100" y="0.0" width="368" height="156"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybs-p7-yKY">
-                                        <rect key="frame" x="0.0" y="16.000000000000004" width="318" height="41.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="16.000000000000004" width="368" height="41.333333333333343"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELf-fz-Wso">
-                                        <rect key="frame" x="0.0" y="57.333333333333329" width="318" height="41.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="57.333333333333329" width="368" height="41.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOO-A6-pAe">
-                                        <rect key="frame" x="0.0" y="98.666666666666671" width="318" height="41.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="98.666666666666671" width="368" height="41.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -82,9 +80,4 @@
             <point key="canvasLocation" x="210.68702290076334" y="59.154929577464792"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

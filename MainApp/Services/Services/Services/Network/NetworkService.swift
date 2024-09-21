@@ -20,7 +20,8 @@ public final class NetworkService {
                         let res = try JSONDecoder().decode(T.self, from: data ?? Data())
                         completion(.success(res))
                     } catch let error {
-                        print("Error decoding data \(error)")
+                        print("Error decoding data \(error.localizedDescription)")
+                        completion(.failure(error))
                     }
                 case .failure(let error):
                     completion(.failure(error))

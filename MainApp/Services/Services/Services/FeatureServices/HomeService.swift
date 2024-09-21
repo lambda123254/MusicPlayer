@@ -13,13 +13,13 @@ public enum HomeService: NetworkLayer {
 
 public extension HomeService {
     var baseURL: String {
-        return "https://itunes.apple.com/search?term=hip hip hura hura"
+        return "https://itunes.apple.com/"
     }
     
     var path: String {
         switch self {
         case .getSongData:
-            return ""
+            return "search"
         }
     }
     
@@ -40,7 +40,7 @@ public extension HomeService {
     var parameter: Parameters {
         switch self {
         case .getSongData(let name):
-            return [:]
+            return ["term" : name]
         }
     }
 }

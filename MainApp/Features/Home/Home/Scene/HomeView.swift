@@ -28,6 +28,7 @@ class HomeView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupSearchField()
         bindViewModel()
     }
     
@@ -35,6 +36,10 @@ class HomeView: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HomeTableViewCell.nib, forCellReuseIdentifier: HomeTableViewCell.string)
+    }
+    
+    func setupSearchField() {
+        searchField.delegate = self
     }
     
     private func bindViewModel() {
@@ -45,6 +50,29 @@ class HomeView: UIViewController {
             }.store(in: &cancellables)
     }
     
+}
+
+extension HomeView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchField.showsCancelButton = true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchField.resignFirstResponder()
+        viewModel?.fetchSongData(searchText: searchBar.text ?? "")
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchField.showsCancelButton = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchField.resignFirstResponder()
+        searchField.showsCancelButton = false
+    }
 }
 
 extension HomeView: UITableViewDelegate, UITableViewDataSource {

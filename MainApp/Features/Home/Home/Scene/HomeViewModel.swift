@@ -15,8 +15,8 @@ class HomeViewModel: ObservableObject {
     
     @Published var songListData: [SongModel] = []
     
-    func fetchSongData() {
-        networkService.request(service: HomeService.getSongData(name: ""), object: SongResponse.self) {[weak self] result in
+    func fetchSongData(searchText: String) {
+        networkService.request(service: HomeService.getSongData(name: searchText), object: SongResponse.self) {[weak self] result in
             switch result {
             case .success(let response):
                 self?.songListData = response.results ?? []

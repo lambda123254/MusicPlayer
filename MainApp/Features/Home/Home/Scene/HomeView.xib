@@ -31,22 +31,69 @@
                     <rect key="frame" x="16" y="131" width="361" height="671"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sw2-lS-gWC">
+                    <rect key="frame" x="16" y="743" width="361" height="75"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7oY-Fo-iRd">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="75"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaH-qL-Nbn">
+                                    <rect key="frame" x="0.0" y="0.0" width="361" height="34.333333333333336"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgX-ri-0pL">
+                                            <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="34.333333333333336"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="backward.fill" catalog="system" title=" "/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43V-Wt-hhH">
+                                            <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="34.333333333333336"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system" title=" "/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8P-w5-xmG">
+                                            <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="34.333333333333336"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="forward.fill" catalog="system" title=" "/>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="08c-8F-bBg">
+                                    <rect key="frame" x="-2" y="34.333333333333371" width="365" height="41.666666666666657"/>
+                                </slider>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="7oY-Fo-iRd" secondAttribute="trailing" id="56H-xC-KkP"/>
+                        <constraint firstAttribute="bottom" secondItem="7oY-Fo-iRd" secondAttribute="bottom" id="CiV-yR-qyh"/>
+                        <constraint firstItem="7oY-Fo-iRd" firstAttribute="leading" secondItem="sw2-lS-gWC" secondAttribute="leading" id="c2U-ae-H5r"/>
+                        <constraint firstItem="7oY-Fo-iRd" firstAttribute="top" secondItem="sw2-lS-gWC" secondAttribute="top" id="qBg-lK-PqL"/>
+                        <constraint firstAttribute="height" constant="75" id="sYc-ww-eHf"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="HFf-bc-7qb" secondAttribute="trailing" constant="16" id="1yf-4k-y1j"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8KD-7I-h2E" secondAttribute="bottom" constant="16" id="4lt-Wr-8bI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="sw2-lS-gWC" secondAttribute="bottom" id="6zi-hV-6Au"/>
                 <constraint firstItem="8KD-7I-h2E" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="7BM-OT-R7s"/>
                 <constraint firstItem="8KD-7I-h2E" firstAttribute="top" secondItem="HFf-bc-7qb" secondAttribute="bottom" id="TEE-q6-MfK"/>
                 <constraint firstItem="HFf-bc-7qb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="WbW-Wa-Vhp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8KD-7I-h2E" secondAttribute="trailing" constant="16" id="tWG-Zj-ujB"/>
                 <constraint firstItem="HFf-bc-7qb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="wMt-T6-Y6W"/>
+                <constraint firstItem="sw2-lS-gWC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="xUP-Jr-XdD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sw2-lS-gWC" secondAttribute="trailing" constant="16" id="zZL-IW-sQW"/>
             </constraints>
             <point key="canvasLocation" x="123" y="20"/>
         </view>
     </objects>
     <resources>
+        <image name="backward.fill" catalog="system" width="128" height="77"/>
+        <image name="forward.fill" catalog="system" width="128" height="77"/>
+        <image name="play.fill" catalog="system" width="117" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

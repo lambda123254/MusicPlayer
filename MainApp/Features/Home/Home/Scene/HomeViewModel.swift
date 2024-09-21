@@ -29,9 +29,6 @@ class HomeViewModel: NSObject {
     @Published var songListData: [SongModel] = []
     @Published var state: HomeViewState = .noMusic
     
-    public override init() {
-    }
-    
     func fetchSongData(searchText: String) {
         networkService.request(service: HomeService.getSongData(name: searchText), object: SongResponse.self) {[weak self] result in
             switch result {

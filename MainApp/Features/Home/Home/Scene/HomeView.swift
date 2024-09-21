@@ -17,7 +17,7 @@ class HomeView: UIViewController {
     @IBOutlet weak var bottomPlayContainer: UIView!
     @IBOutlet weak var bottomPlayButton: UIButton!
     @IBOutlet weak var musicTimeSlider: UISlider!
-    
+
     init() {
         super.init(nibName: String(describing: HomeView.self), bundle: Bundle(for: HomeView.self))
     }

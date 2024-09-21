@@ -63,11 +63,18 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMv-Y7-kaP">
+                        <rect key="frame" x="410" y="61" width="42" height="34.333333333333343"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="pause.fill" catalog="system"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="D8d-Cw-3Pw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XKl-gl-KW2"/>
                     <constraint firstAttribute="trailing" secondItem="D8d-Cw-3Pw" secondAttribute="trailing" id="bTU-wg-X5J"/>
+                    <constraint firstAttribute="trailing" secondItem="LMv-Y7-kaP" secondAttribute="trailing" constant="16" id="fne-me-vID"/>
                     <constraint firstItem="D8d-Cw-3Pw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="p7I-PJ-Hxy"/>
+                    <constraint firstItem="LMv-Y7-kaP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="paa-xv-6jy"/>
                     <constraint firstAttribute="bottom" secondItem="D8d-Cw-3Pw" secondAttribute="bottom" id="xMV-4s-Sa6"/>
                 </constraints>
             </tableViewCellContentView>
@@ -80,4 +87,7 @@
             <point key="canvasLocation" x="210.68702290076334" y="59.154929577464792"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="pause.fill" catalog="system" width="117" height="128"/>
+    </resources>
 </document>

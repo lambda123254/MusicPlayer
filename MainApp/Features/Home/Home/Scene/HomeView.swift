@@ -6,14 +6,11 @@
 //
 
 import UIKit
-import Combine
 import AVFoundation
 
 class HomeView: UIViewController {
     
     var viewModel: HomeViewModel?
-    
-    private var cancellables = Set<AnyCancellable>()
     
     @IBOutlet weak var searchField: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -35,7 +32,7 @@ class HomeView: UIViewController {
         setupSearchField()
         setupBottomPlayButton()
         setupBottomMusicPlayer()
-        bindViewModel()
+        viewModel?.bindViewModel()
     }
     
     func setupTableView() {
@@ -55,18 +52,15 @@ class HomeView: UIViewController {
     func setupBottomMusicPlayer() {
         musicTimeSlider.value = 0
         musicTimeSlider.minimumValue = 0
+        musicTimeSlider.maximumValue = 30
     }
     
-    private func bindViewModel() {
-        viewModel?.$songListData
-            .receive(on: RunLoop.main)
-            .sink { [weak self] data in
-                self?.tableView.reloadData()
-            }.store(in: &cancellables)
+    func reloadTableView() {
+        tableView.reloadData()
     }
     
     @objc func bottomPlayButtonTapped() {
-        viewModel?.bottomPlayButtonTapped()
+        viewModel?.playButtonTapped()
     }
     
 }

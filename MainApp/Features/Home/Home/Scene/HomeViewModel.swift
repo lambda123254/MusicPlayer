@@ -50,14 +50,6 @@ class HomeViewModel: NSObject {
             .sink { [weak self] data in
                 guard let view = self?.view else {return}
                 view.reloadTableView()
-                view.tableView.visibleCells.forEach({ cell in
-                    let cell = cell as? HomeTableViewCell
-                    if cell?.trackId == self?.previousMusicId {
-                        cell?.updateProgress(maxProgress: 30, currentDuration: CGFloat(view.musicTimeSlider.value))
-                    } else {
-                        cell?.stopUpdatingProgress()
-                    }
-                })
             }.store(in: &cancellables)
         
         $state

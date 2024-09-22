@@ -96,6 +96,12 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
             cell.artistLabel.text = data[indexPath.row].artistName
             cell.albumLabel.text = data[indexPath.row].collectionName
             cell.trackId = data[indexPath.row].trackId
+            
+            if cell.trackId == viewModel?.previousMusicId {
+                cell.updateProgress(maxProgress: 30, currentDuration: CGFloat(musicTimeSlider.value))
+            } else {
+                cell.stopUpdatingProgress()
+            }
             return cell
         }
         return UITableViewCell()

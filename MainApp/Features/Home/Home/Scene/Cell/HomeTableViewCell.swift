@@ -14,13 +14,16 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var songLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var albumLabel: UILabel!
+    @IBOutlet weak var playButton: UIButton!
     
-    private var circularProgressView: CircularProgressView!
-
+    private var circularProgressView: CircularProgressView?
+    private var timer: Timer?
+    
+    public var trackId: Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCircularProgressView()
-        startLoadingAnimation()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,26 +34,52 @@ class HomeTableViewCell: UITableViewCell {
     
     private func setupCircularProgressView() {
         circularProgressView = CircularProgressView()
-        circularProgressView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(circularProgressView)
-        NSLayoutConstraint.activate([
-            circularProgressView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            circularProgressView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
-            circularProgressView.widthAnchor.constraint(equalToConstant: 42),
-            circularProgressView.heightAnchor.constraint(equalToConstant: 42)
-        ])
+        if let circularProgressView = circularProgressView {
+            circularProgressView.isHidden = true
+            circularProgressView.minValue = .zero
+            circularProgressView.maxValue = 30
+            circularProgressView.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(circularProgressView)
+            NSLayoutConstraint.activate([
+                circularProgressView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                circularProgressView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+                circularProgressView.widthAnchor.constraint(equalToConstant: 42),
+                circularProgressView.heightAnchor.constraint(equalToConstant: 42)
+            ])
+        }
+        
     }
     
     
-    private func startLoadingAnimation() {
-        var progress: CGFloat = 0
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
-            progress += 0.01
-            self.circularProgressView.progress = progress
-            
-            if progress >= 1 {
-                timer.invalidate()
+    func updateProgress(maxProgress: CGFloat, currentDuration: CGFloat? = nil) {
+        if let circularProgressView = circularProgressView {
+            circularProgressView.progress = currentDuration ?? .zero
+            circularProgressView.isHidden = false
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {[weak self] timer in
+                let circularProgress = circularProgressView.progress
+                circularProgressView.progress += 1
+                if circularProgress >= maxProgress {
+                    timer.invalidate()
+                }
             }
+        }
+        
+    }
+    
+    func stopUpdatingProgress() {
+        if let circularProgressView = circularProgressView {
+            circularProgressView.isHidden = true
+            circularProgressView.progress = .zero
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    func pauseUpdatingProgress() {
+        if let circularProgressView = circularProgressView {
+            circularProgressView.isHidden = true
+            circularProgressView.progress = .zero
+            timer?.invalidate()
         }
     }
     

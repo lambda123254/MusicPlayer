@@ -10,11 +10,28 @@ import UIKit
 class CircularProgressView: UIView {
     private var shapeLayer: CAShapeLayer!
     private var progressLayer: CAShapeLayer!
+
+    var minValue: CGFloat = 0 {
+        didSet {
+            updateProgressLayer()
+        }
+    }
+    
+    var maxValue: CGFloat = 1 {
+        didSet {
+            updateProgressLayer()
+        }
+    }
     
     var progress: CGFloat = 0 {
         didSet {
-            progressLayer.strokeEnd = progress
+            updateProgressLayer()
         }
+    }
+    
+    private func updateProgressLayer() {
+        let normalizedProgress = (progress - minValue) / (maxValue - minValue)
+        progressLayer.strokeEnd = min(max(normalizedProgress, 0), 1)
     }
     
     override init(frame: CGRect) {
@@ -52,11 +69,12 @@ class CircularProgressView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        shapeLayer.path = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY),
-                                        radius: bounds.width / 2 - 5,
-                                        startAngle: -CGFloat.pi / 2,
-                                        endAngle: 2 * CGFloat.pi - CGFloat.pi / 2,
-                                        clockwise: true).cgPath
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY),
+                                         radius: bounds.width / 2 - 5,
+                                         startAngle: -CGFloat.pi / 2,
+                                         endAngle: 2 * CGFloat.pi - CGFloat.pi / 2,
+                                         clockwise: true)
+        shapeLayer.path = circularPath.cgPath
         progressLayer.path = shapeLayer.path
     }
 }

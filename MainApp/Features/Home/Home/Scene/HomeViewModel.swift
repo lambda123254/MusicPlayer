@@ -29,6 +29,9 @@ class HomeViewModel: NSObject {
     @Published var songListData: [SongModel] = []
     @Published var state: HomeViewState = .noMusic
     
+    var previousMusicId: Int = .zero
+    var previousCell: HomeTableViewCell?
+    
     func fetchSongData(searchText: String) {
         networkService.request(service: HomeService.getSongData(name: searchText), object: SongResponse.self) {[weak self] result in
             switch result {
@@ -45,7 +48,16 @@ class HomeViewModel: NSObject {
         $songListData
             .receive(on: RunLoop.main)
             .sink { [weak self] data in
-                self?.view?.reloadTableView()
+                guard let view = self?.view else {return}
+                view.reloadTableView()
+                view.tableView.visibleCells.forEach({ cell in
+                    let cell = cell as? HomeTableViewCell
+                    if cell?.trackId == self?.previousMusicId {
+                        cell?.updateProgress(maxProgress: 30, currentDuration: CGFloat(view.musicTimeSlider.value))
+                    } else {
+                        cell?.stopUpdatingProgress()
+                    }
+                })
             }.store(in: &cancellables)
         
         $state
@@ -82,29 +94,21 @@ class HomeViewModel: NSObject {
         }
     }
     
-    func playSong(index: Int) {
+    func playSong(id: Int) {
+        let index = songListData.firstIndex(where: {$0.trackId == id}) ?? .zero
+        let previousIndex = songListData.firstIndex(where: {$0.trackId == previousMusicId}) ?? .zero
+        previousCell = view?.tableView.cellForRow(at: IndexPath(row: previousIndex, section: .zero)) as? HomeTableViewCell
+        previousCell?.stopUpdatingProgress()
+        
         view?.musicTimeSlider.value = .zero
+        
         if let data = songListData[index].previewUrl, let url = URL(string: data) {
             audioItem = AVPlayerItem(url: url)
             audioPlayer = AVPlayer(playerItem: audioItem)
             audioPlayer?.play()
         }
-
+        
         state = .musicPlaying
+        previousMusicId = id
     }
-    
-//    @objc func playerItemDidBecomeReady(notification: Notification) {
-//        guard let playerItem = notification.object as? AVPlayerItem else { return }
-//        if playerItem.status == .readyToPlay {
-//            // Get the duration in seconds
-//            let durationInSeconds = CMTimeGetSeconds(playerItem.duration)
-//            print("Audio duration: \(durationInSeconds) seconds")
-//            
-//            // Convert to minutes if needed
-//            let durationInMinutes = durationInSeconds / 60
-//            print("Audio duration: \(durationInMinutes) minutes")
-//        } else {
-//            print("Player item is not ready to play.")
-//        }
-//    }
 }

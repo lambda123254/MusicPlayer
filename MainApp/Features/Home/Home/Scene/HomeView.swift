@@ -17,7 +17,7 @@ class HomeView: UIViewController {
     @IBOutlet weak var bottomPlayContainer: UIView!
     @IBOutlet weak var bottomPlayButton: UIButton!
     @IBOutlet weak var musicTimeSlider: UISlider!
-
+    
     init() {
         super.init(nibName: String(describing: HomeView.self), bundle: Bundle(for: HomeView.self))
     }
@@ -95,6 +95,7 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
             cell.songLabel.text = data[indexPath.row].trackName
             cell.artistLabel.text = data[indexPath.row].artistName
             cell.albumLabel.text = data[indexPath.row].collectionName
+            cell.trackId = data[indexPath.row].trackId
             return cell
         }
         return UITableViewCell()
@@ -105,7 +106,9 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? HomeTableViewCell
         bottomPlayContainer.isHidden = false
-        viewModel?.playSong(index: indexPath.row)
+        viewModel?.playSong(id: cell?.trackId ?? .zero)
+        cell?.updateProgress(maxProgress: 30)
     }
 }

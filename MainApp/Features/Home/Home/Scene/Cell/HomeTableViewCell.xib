@@ -63,18 +63,18 @@
                             </stackView>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMv-Y7-kaP">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgk-UD-P9l">
                         <rect key="frame" x="410" y="61" width="42" height="34.333333333333343"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="pause.fill" catalog="system"/>
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="rgk-UD-P9l" secondAttribute="trailing" constant="16" id="JT3-IN-Gn5"/>
                     <constraint firstItem="D8d-Cw-3Pw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XKl-gl-KW2"/>
+                    <constraint firstItem="rgk-UD-P9l" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZkC-cd-adp"/>
                     <constraint firstAttribute="trailing" secondItem="D8d-Cw-3Pw" secondAttribute="trailing" id="bTU-wg-X5J"/>
-                    <constraint firstAttribute="trailing" secondItem="LMv-Y7-kaP" secondAttribute="trailing" constant="16" id="fne-me-vID"/>
                     <constraint firstItem="D8d-Cw-3Pw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="p7I-PJ-Hxy"/>
-                    <constraint firstItem="LMv-Y7-kaP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="paa-xv-6jy"/>
                     <constraint firstAttribute="bottom" secondItem="D8d-Cw-3Pw" secondAttribute="bottom" id="xMV-4s-Sa6"/>
                 </constraints>
             </tableViewCellContentView>

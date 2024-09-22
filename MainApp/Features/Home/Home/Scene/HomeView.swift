@@ -18,6 +18,9 @@ class HomeView: UIViewController {
     @IBOutlet weak var bottomPlayButton: UIButton!
     @IBOutlet weak var musicTimeSlider: UISlider!
     
+    var loadingView: LoadingView = LoadingView()
+    var toastView: ToastView?
+    
     init() {
         super.init(nibName: String(describing: HomeView.self), bundle: Bundle(for: HomeView.self))
     }
@@ -32,7 +35,28 @@ class HomeView: UIViewController {
         setupSearchField()
         setupBottomPlayButton()
         setupBottomMusicPlayer()
+        setupLoadingView()
         viewModel?.bindViewModel()
+    }
+    
+    func showToast(message: String) {
+        toastView?.removeFromSuperview()
+        toastView = ToastView(message: message)
+        toastView?.show(in: self.view, duration: 3.0)
+    }
+    
+    func setupLoadingView() {
+        loadingView.frame = view.bounds
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadingView)
+        
+        // Setup constraints to fit the entire screen
+        NSLayoutConstraint.activate([
+            loadingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadingView.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     func setupTableView() {
@@ -59,6 +83,14 @@ class HomeView: UIViewController {
         tableView.reloadData()
     }
     
+    func triggerLoadingView(startLoading: Bool) {
+        if startLoading {
+            loadingView.startAnimating()
+        } else {
+            loadingView.stopAnimating()
+        }
+    }
+    
     @objc func bottomPlayButtonTapped() {
         viewModel?.playButtonTapped()
     }
@@ -66,7 +98,7 @@ class HomeView: UIViewController {
 }
 
 extension HomeView: UISearchBarDelegate {
-
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchField.showsCancelButton = true
     }

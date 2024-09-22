@@ -14,4 +14,13 @@ public struct SongModel: Codable {
     public let artistName: String?
     public let collectionName: String?
     public let previewUrl: String?
+    
+    public init(trackId: Int?, wrapperType: String?, trackName: String?, artistName: String?, collectionName: String?, previewUrl: String?) {
+        self.trackId = trackId
+        self.wrapperType = wrapperType
+        self.trackName = trackName
+        self.artistName = artistName
+        self.collectionName = collectionName
+        self.previewUrl = previewUrl
+    }
 }

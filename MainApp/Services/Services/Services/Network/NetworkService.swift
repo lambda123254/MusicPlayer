@@ -7,7 +7,11 @@
 
 import Alamofire
 
-public final class NetworkService {
+public protocol NetworkServiceProtocol {
+    func request<T: Decodable>(service: NetworkLayer, object: T.Type, completion: @escaping (Result<T, Error>) -> Void)
+}
+
+public final class NetworkService: NetworkServiceProtocol {
     
     public init (){}
     

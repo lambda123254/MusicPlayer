@@ -21,7 +21,6 @@ class HomeViewModel: NSObject {
     weak var view: HomeView?
     
     private var cancellables = Set<AnyCancellable>()
-    private var networkService: NetworkService = NetworkService()
     private var audioPlayer: AVPlayer?
     private var audioItem: AVPlayerItem?
     private var musicTimer: DispatchSourceTimer?
@@ -31,16 +30,19 @@ class HomeViewModel: NSObject {
     
     var previousMusicId: Int = .zero
     var previousCell: HomeTableViewCell?
-    
+    var networkService: NetworkServiceProtocol = NetworkService()
+
     func fetchSongData(searchText: String) {
+        view?.triggerLoadingView(startLoading: true)
         networkService.request(service: HomeService.getSongData(name: searchText), object: SongResponse.self) {[weak self] result in
             switch result {
             case .success(let response):
                 let filteredResponse = response.results?.filter({$0.wrapperType == "track"})
                 self?.songListData = filteredResponse ?? []
             case .failure(let failure):
-                print(failure)
+                self?.view?.showToast(message: "Error: Bad API")
             }
+            self?.view?.triggerLoadingView(startLoading: false)
         }
     }
     

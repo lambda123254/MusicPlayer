@@ -15,15 +15,22 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var albumLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var songImageView: UIImageView!
     
     private var circularProgressView: CircularProgressView?
     private var timer: Timer?
     
     public var trackId: Int?
+    public var state: HomeViewState? = .noMusic
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCircularProgressView()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        stopUpdatingProgress()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -57,7 +64,11 @@ class HomeTableViewCell: UITableViewCell {
             circularProgressView.isHidden = false
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {[weak self] timer in
                 let circularProgress = circularProgressView.progress
-                circularProgressView.progress += 1
+                
+                if self?.state == .musicPlaying {
+                    circularProgressView.progress += 1
+                }
+                
                 if circularProgress >= maxProgress {
                     timer.invalidate()
                 }
@@ -76,11 +87,8 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func pauseUpdatingProgress() {
-        if let circularProgressView = circularProgressView {
-            circularProgressView.isHidden = true
-            circularProgressView.progress = .zero
-            timer?.invalidate()
-        }
+        timer?.invalidate()
+        timer = nil
     }
     
 }

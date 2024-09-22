@@ -39,7 +39,7 @@ class HomeViewModel: NSObject {
             case .success(let response):
                 let filteredResponse = response.results?.filter({$0.wrapperType == "track"})
                 self?.songListData = filteredResponse ?? []
-            case .failure(let failure):
+            case .failure(let error):
                 self?.view?.showToast(message: "Error: Bad API")
             }
             self?.view?.triggerLoadingView(startLoading: false)
@@ -57,12 +57,15 @@ class HomeViewModel: NSObject {
         $state
             .receive(on: RunLoop.main)
             .sink { [weak self] data in
+                let previousIndex = self?.songListData.firstIndex(where: {$0.trackId == self?.previousMusicId}) ?? .zero
+                self?.previousCell = self?.view?.tableView.cellForRow(at: IndexPath(row: previousIndex, section: .zero)) as? HomeTableViewCell
                 switch self?.state {
                 case .musicStop:
                     self?.view?.bottomPlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
                     self?.audioPlayer?.pause()
                     self?.musicTimer?.cancel()
                     self?.musicTimer = nil
+                    self?.previousCell?.state = .musicStop
                 case .musicPlaying:
                     self?.musicTimer = DispatchSource.makeTimerSource()
                     self?.musicTimer?.schedule(deadline: .now() + 1, repeating: 1.0)
@@ -73,6 +76,7 @@ class HomeViewModel: NSObject {
                             self?.view?.musicTimeSlider.value += 1
                         }
                     }
+                    self?.previousCell?.state = .musicPlaying
                     self?.musicTimer?.resume()
                 default:
                     break

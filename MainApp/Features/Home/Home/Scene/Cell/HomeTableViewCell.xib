@@ -82,6 +82,7 @@
             <connections>
                 <outlet property="albumLabel" destination="JOO-A6-pAe" id="Rbm-si-0Nx"/>
                 <outlet property="artistLabel" destination="ELf-fz-Wso" id="bWz-TQ-Y4w"/>
+                <outlet property="songImageView" destination="57U-HZ-nIy" id="1QV-Od-Ym3"/>
                 <outlet property="songLabel" destination="ybs-p7-yKY" id="Kc4-bR-HAW"/>
             </connections>
             <point key="canvasLocation" x="210.68702290076334" y="59.154929577464792"/>

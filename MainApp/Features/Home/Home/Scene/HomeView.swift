@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import SDWebImage
 
 class HomeView: UIViewController {
     
@@ -123,11 +124,12 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
         return viewModel?.songListData.count ?? .zero
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.string, for: indexPath) as? HomeTableViewCell, let data = viewModel?.songListData {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.string, for: indexPath) as? HomeTableViewCell, let data = viewModel?.songListData, let imageUrl = URL(string: data[indexPath.row].artworkUrl100 ?? "") {
             cell.songLabel.text = data[indexPath.row].trackName
             cell.artistLabel.text = data[indexPath.row].artistName
             cell.albumLabel.text = data[indexPath.row].collectionName
             cell.trackId = data[indexPath.row].trackId
+            cell.songImageView.sd_setImage(with: imageUrl)
             
             if cell.trackId == viewModel?.previousMusicId {
                 cell.updateProgress(maxProgress: 30, currentDuration: CGFloat(musicTimeSlider.value))
@@ -148,5 +150,6 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
         bottomPlayContainer.isHidden = false
         viewModel?.playSong(id: cell?.trackId ?? .zero)
         cell?.updateProgress(maxProgress: 30)
+        cell?.state = .musicPlaying
     }
 }
